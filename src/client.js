@@ -75,7 +75,7 @@ client.on('message', (message, cb) => {
 
 
 	// todo : make the router do the routing
-	
+
 	let reply = '';
 	const command = message.content.split(' ')[0].toLowerCase();
 	// replace any multiple spaces with a single space
@@ -83,7 +83,7 @@ client.on('message', (message, cb) => {
 
 	if (message.member && command !== '!play')	{CHATCOMMANDS.checkNew(message);}
 	CHATCOMMANDS.mod(message);
-	
+
 	if (message.content[0] !== '!') {
 		return;
 	}
@@ -101,20 +101,20 @@ client.on('message', (message, cb) => {
 		else {return cb(CHATCOMMANDS.egg(message));}
 	}
 	//Inside Professor Redwood Channel, Do not touch message.member
-	else if (message.channel.name !== 'professor_redwood') {
+	else if (message.channel.name !== 'professor_callery') {
 		if (message.channel.name.indexOf('-') > 0) //neighborhood channel
 			message.channel.send(message.member.displayName + ', I don\'t recognize your entry in this channel\n' +
 				'For raids, use **!raid boss timeLeft location**\n' +
 				'For eggs, use **!egg tierNumber timeLeft location**\n' +
 				'For quests, use **!quest reward task location**\n' +
 				'For wild spawns, use **!wild pokemonName location**\n' +
-				'For everything else, go to ' + channelsByName['professor_redwood'] + ' channel and type **!help**');
+				'For everything else, go to ' + channelsByName['professor_callery'] + ' channel and type **!help**');
 		else
 			message.channel.send(message.member.displayName + ', I don\'t recognize your entry, you need to be in the channel for bot commands. Please click here: ' +
-				channelsByName['professor_redwood'] + ' and type **!help**')
+				channelsByName['professor_callery'] + ' and type **!help**')
 		return;
 	}
-	
+
 	logger.info({ event: `${message.member.displayName} said ${message.content} in ${message.channel.name}` });
 
 	if (command === '!breakpoint' || command === '!bp') {return cb(CHATCOMMANDS.breakpoint(message));}

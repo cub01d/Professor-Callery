@@ -1,8 +1,10 @@
 ### Summary ###
+This is a fork of the Professor Redwood bot for the UCSB/IV/Goleta area.
+
 Professor Redwood has arrived from the California Bay Area. He will help you run your local discord communities for Pokemon GO. See our bot in action on the SF PoGo Raids Meetup https://discord.gg/9MJdRZm
 
 ### How do I contribute? ###
-Make a pull request!
+Create an issue/discussion, and make a pull request!
 
 ### How do I get set up? ###
 To run this bot you will need a ES6 node environment. The bot currently does not have database functions.
@@ -32,10 +34,11 @@ To run this bot you will need a ES6 node environment. The bot currently does not
 - Click Create a Bot User
 - Under App Details, click to reveal the Token (This is your token needed for the bot code!)
 - Copy the Token, and paste it into your secrets.js file under BOTID
-- Now, copy the Client ID and paste it into this URL: https://discordapp.com/oauth2/authorize?&client_id=<CLIENT ID>&scope=bot&permissions=0
+- Now, copy the Client ID and paste it into this URL: `https://discordapp.com/oauth2/authorize?&client_id=<CLIENT ID>&scope=bot&permissions=0`
 - Choose the name of your Discord server
 - Authorize the Bot!
 - Go to the Server Settings for your discord, and search for a user/member, find your bot and grant it mod privileges
 5) Go to the config folder and create a secrets.json. Follow instructions in the config/readme.txt.
-6) Run your bot
-node bot.js
+6) Change relevant config settings in the config folder.
+7) Install node packages with `npm install`
+8) Run your bot: `npm start`

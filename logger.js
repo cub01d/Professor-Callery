@@ -1,6 +1,6 @@
 const { createLogger } = require('bunyan');
 const logger = createLogger({
-	name: 'Redwood',
+	name: 'Callery',
 	stream: process.stdout,
 	level: 'info',
 });

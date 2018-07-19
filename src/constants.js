@@ -32,7 +32,7 @@ const tagOrComment = new RegExp(
 	'gi');
 
 const data = {
-	BOTNAME: 'Professor Redwood',
+	BOTNAME: 'Professor Callery',
 	BOTID: secrets.discord.BOTID,
 	TEAMS: ['valor', 'instinct', 'mystic'],
 	MONS: ['aerodactyl', 'chansey', 'ditto', 'dratini', 'farfetch\'d', 'dragonite', 'girafarig', 'grimer', 'hitmonchan', 'hitmonlee', 'hitmontop',
@@ -59,7 +59,7 @@ const data = {
 		'fasttm': 'technical_machine'
 	},
 	NSFW_WORDS: [' fuck ', ' fucking ', ' fuckin ', ' shit ', ' shitty '],
-	PROTECTED_CHANNELS: ['start_here', 'professor_redwood', 'announcements'], // todo : move to a config file
+	PROTECTED_CHANNELS: ['start_here', 'professor_callery', 'announcements'], // todo : move to a config file
 	PROTECTED_ROLES: ['admin', 'mod', 'dev', 'VIP', '@everyone', 'timeout_inthecorner'], // todo : move to a config file
 	PRIVILEGED_ROLES: ['admin', 'mod'],
 };

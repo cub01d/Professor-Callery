@@ -1,5 +1,5 @@
 {
-  "name": "Professor_Redwood",
+  "name": "Professor_Callery",
   "version": "1.1.0",
   "description": "Discord bot for pokemon go",
   "main": "bot-test.js",
@@ -16,7 +16,8 @@
     "eslint": "^4.3.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node bot.js"
   },
   "keywords": [],
   "author": "",
