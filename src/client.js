@@ -88,7 +88,7 @@ client.on('message', (message, cb) => {
 		return;
 	}
 
-	//Outside of Professor Redwood Channel, Message.member has NOT been null checked yet
+	//Outside of Professor Callery Channel, Message.member has NOT been null checked yet
 	if (command === '!raid' || command === '!egg' || command === '!wild' || command === '!quest') {
 		if (message.channel.name.indexOf('-') === -1) {
 			reply = message.member.displayName + ', raid/egg/wild/quest commands should only be run in the corresponding neighborhood channel';
@@ -100,7 +100,7 @@ client.on('message', (message, cb) => {
 		else if(command === '!quest') {return cb(CHATCOMMANDS.quest(message));}
 		else {return cb(CHATCOMMANDS.egg(message));}
 	}
-	//Inside Professor Redwood Channel, Do not touch message.member
+	//Inside Professor Callery Channel, Do not touch message.member
 	else if (message.channel.name !== 'professor_callery') {
 		if (message.channel.name.indexOf('-') > 0) //neighborhood channel
 			message.channel.send(message.member.displayName + ', I don\'t recognize your entry in this channel\n' +
