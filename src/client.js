@@ -130,7 +130,7 @@ client.on('message', (message, cb) => {
 
 	if (command === '!play') {return cb(CHATCOMMANDS.play(message));}
 	else if (command === '!hide') {return cb(CHATCOMMANDS.hide(message));}
-	else if (command === '!team') {return cb(CHATCOMMANDS.team(message));}
+	//else if (command === '!team') {return cb(CHATCOMMANDS.team(message));}
 	else if (command === '!want') {return cb(CHATCOMMANDS.want(message));}
 	else if (command === '!reset') {return cb(CHATCOMMANDS.reset(message));}
 

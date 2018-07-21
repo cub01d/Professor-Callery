@@ -5,7 +5,7 @@
     "allregions"
   ],
   "region_subregions": {
-    "allregions": ["campus-iv"]
+    "allregions": ["campus-iv", "goleta"]
   },
   "region_neighborhoods": {
     "campus-iv": ["ucsb-campus", "isla-vista"],

@@ -12,7 +12,7 @@ const play = require('./chatcommands/play');
 const quest = require('./chatcommands/quest');
 const raid = require('./chatcommands/raid');
 const reset = require('./chatcommands/reset');
-const team = require('./chatcommands/team');
+//const team = require('./chatcommands/team');
 const want = require('./chatcommands/want');
 const wild = require('./chatcommands/wild');
 
@@ -30,7 +30,7 @@ module.exports = (data) => {
 		quest: quest(data),
 		raid: raid(data),
 		reset: reset(data),
-		team: team(data),
+	//	team: team(data),
 		want: want(data),
 		wild: wild(data),
 	};
