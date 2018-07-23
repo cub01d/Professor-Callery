@@ -6,9 +6,9 @@ const CONSTANTS = require('./../constants');
 const handleHelp = (data, message) => {
 	let reply = '';
 
-    reply += '**Reporting raids and wild pokemon:**\n'
+    reply += '**Reporting raids and wild pokemon:**\n\n'
 	reply += '**!egg tier# minutesLeft [exgym] location**\n*(run only in neighborhood channels with a - in their name)*\n';
-	reply += 'Reports a raid egg which is forwarded to ' + data.channelsByName['gymraids_alerts'] + ' and the regional gymraids_ channel\n';
+	reply += 'Reports a raid egg which is forwarded to ' + data.channelsByName['gymraids_alerts'] + ' and the regional gymraids_ channel\n\n';
     reply += 'Example: *!egg 5 40 exgym eflame*\n\n'
 
 	reply += '**!raid boss minutesLeft [exgym] location**\n*(run only in neighborhood channels with a - in their name)*\n';
@@ -27,12 +27,13 @@ const handleHelp = (data, message) => {
 //	reply += '**!hide #channel**\n*(specify the channel using # at the beginning)*\n';
 //	reply += 'Removes the channel you specify from your channel list' + '\n\n';
 
-	reply += '**!want pokemonName**\n*(type **!want** for a list of available pokemon*\nStarts OR stops alerts you receive for specified pokemon\n\n';
+	reply += '**!want pokemon/reward/notification**\n*(type **!want** for a list of available pokemon*\nStarts OR stops alerts you receive for specified pokemon, quest rewards, and various other notifications\n\n';
+    reply += 'Example: *!want chansey* or *!want highiv*\n\n\n\n'
 
 //	reply += '**!reset**\n*(reverses !want and !hide commands)*\n';
 //	reply += 'Resets your profile on the discord: including team, alerts, and channel hiding' + '\n\n';
 
-    reply += '**Getting information on counters and breakpoints:**\n';
+    reply += '**Getting information on counters and breakpoints:**\n\n';
 	reply += '**!cp pokemonName** or **!counters pokemonName**\n*(available for tier 3-5 raid bosses*)\nDisplays the CP range at level 20 or the best counters for the specified pokemon\n\n';
 	reply += '**!breakpoint pokemon attack_move attackIV defender**\n*(!bp may also be used)\n(defender is optional)*\nDisplays how high to power your pokemon to deal max damage to specific pokemon\n\n';
 
