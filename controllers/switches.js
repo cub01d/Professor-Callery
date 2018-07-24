@@ -1,6 +1,6 @@
 const client = require('../src/client');
 const logger = require('../logger');
-const config = (process.env.USE_SECRETS_FILE == "true") ?
+const config = (process.env.USE_SECRETS_FILE) ?
     require('../config/secrets.json') :
     {
       "discord": {

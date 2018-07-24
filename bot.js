@@ -3,7 +3,7 @@
 // const mySQL = require('mysql');
 
 const client = require('./src/client');
-const config = (process.env.USE_SECRETS_FILE === "true") ?
+const config = (process.env.USE_SECRETS_FILE) ?
     require('./config/secrets.json') :
     {
       "discord": {

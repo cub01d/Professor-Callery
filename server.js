@@ -4,8 +4,18 @@ const bodyParser = require('body-parser');
 const client = require('./src/client');
 const SwitchRouter = require('./routes/switch');
 const logger = require('./logger');
+const http = require('http');
 
-const config = (process.env.USE_SECRETS_FILE == "true") ?
+// prevent heroku dyno from going idle
+var uptime = 0;
+var millis = 900000;
+setInterval(function() {
+    http.get("http://professor-callery.herokuapp.com/" + uptime);
+    uptime += 0.25;
+    logger.info("Uptime: " + uptime + " hours");
+}, millis);
+
+const config = (process.env.USE_SECRETS_FILE) ?
     require('./config/secrets.json') :
     {
       "discord": {
