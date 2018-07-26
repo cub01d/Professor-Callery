@@ -7,14 +7,12 @@ const handleMod = (data, message) => {
 	let privileged = false;
 	//improper pokemon tagging
 	if (message.content.indexOf('<@&') > -1) {
-		if (message.member) {
-			if (message.member.roles) {
-				message.member.roles.forEach( (role) => {
-					if (CONSTANTS.PRIVILEGED_ROLES.indexOf(role.name) > -1)	{
-						privileged = true;
-					}
-				});
-			}
+		if (message.member && message.member.roles) {
+            message.member.roles.forEach( (role) => {
+                if (CONSTANTS.PRIVILEGED_ROLES.indexOf(role.name) > -1)	{
+                    privileged = true;
+                }
+            });
 		}
 		if (!privileged) {
 			let roleid = message.content.substring(message.content.indexOf('<@&') + 3);
@@ -25,13 +23,13 @@ const handleMod = (data, message) => {
 			data.GUILD.roles.forEach((role) => {
 				if (role.id == roleid) {
 					let wantedMon = role.name;
-					if (CONSTANTS.MONS.indexOf(wantedMon) > -1 || CONSTANTS.RAIDMONS.indexOf(wantedMon) > -1 || CONSTANTS.LEGENDARYMONS.indexOf(wantedMon) > -1 || 
+					if (CONSTANTS.MONS.indexOf(wantedMon) > -1 || CONSTANTS.RAIDMONS.indexOf(wantedMon) > -1 || CONSTANTS.LEGENDARYMONS.indexOf(wantedMon) > -1 ||
 					CONSTANTS.EGGTIERS.indexOf(wantedMon) > -1) {
-						reply = '**HEY** :rage: \nDo **NOT** use the @ tag when reporting Pokemon or Raids; that\'s my job! Please use the appropriate **!raid**, **!egg**, or **!wild** commands instead.\nFor usage and rules, please read Rule#5 in ' 
+						reply = '**HEY** :rage: \nDo **NOT** use the @ tag when reporting Pokemon or Raids; that\'s my job! Please use the appropriate **!raid**, **!egg**, or **!wild** commands instead.\nFor usage and rules, please read Rule#5 in '
 							+ data.channelsByName['start_here'] + '. You have been warned!';
 						message.channel.send(reply);
 					}
-				} 
+				}
 			});
 		}
 	}

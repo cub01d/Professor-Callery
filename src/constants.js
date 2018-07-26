@@ -54,6 +54,11 @@ const data = {
 	BOTNAME: 'Professor Callery',
 	BOTID: secrets.discord.BOTID,
 	TEAMS: ['valor', 'instinct', 'mystic'],
+    TEAMLEADERS: {
+        'valor': ['valorleader1', 'valorleader2'],
+        'instinct': ['instinctleader1', 'instinctleader2'],
+        'mystic': ['mysticleader1', 'mysticleader2']
+    },
 	MONS: [
         'aerodactyl', 'anorith', 'aron',
         'bagon', 'beldum',
@@ -75,7 +80,6 @@ const data = {
 	EGGTIERS: ['tier3', 'tier4', 'tier5'],
 	RAIDMONS: [
         'absol',
-        'blastoise',
         'charmander',
         'donphan',
         'exeggutor',
@@ -94,7 +98,7 @@ const data = {
     ],
 	SPECIALMONS: ['highiv', 'finalevo'],
 	SPECIALRAIDS: ['exgym'],
-	QUESTREWARDS: ['stardust', 'technical_machine', 'rarecandy', 'shinycheck'],
+	QUESTREWARDS: ['golden-razz', 'rarecandy', 'shinycheck', 'stardust', 'technical_machine'],
 	REGIONS: regionsConfig.regions,
 	COMMON_MISSPELLINGS: {
 		'hooh': 'ho-oh',
@@ -107,7 +111,8 @@ const data = {
 		'slakoff': 'slakoth',
 		'tm': 'technical_machine',
 		'chargetm': 'technical_machine',
-		'fasttm': 'technical_machine'
+		'fasttm': 'technical_machine',
+		'grazz': 'golden-razz'
 	},
 	NSFW_WORDS: [' fuck ', ' fucking ', ' fuckin ', ' shit ', ' shitty '],
 	PROTECTED_CHANNELS: ['start_here', 'professor_callery', 'announcements'], // todo : move to a config file

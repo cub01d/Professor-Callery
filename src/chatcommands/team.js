@@ -21,8 +21,11 @@ const assignTeam = (data, message) => {
 
 	const newTeam = message.content.split(' ').slice(-1)[0].toLowerCase();
 	if (CONSTANTS.TEAMS.indexOf(newTeam) > -1) {
-		message.member.addRole(data.rolesByName[newTeam]);
-		reply = 'Welcome ' + message.member.displayName + '! You now have access to ' + newTeam + '\'s private chat';
+//		message.member.addRole(data.rolesByName[newTeam]);
+//		reply = 'Welcome ' + message.member.displayName + '! You now have access to ' + newTeam + '\'s private chat';
+        reply = 'Welcome ' + message.member.displayName + '! Please verify your team with one of the following '+ newTeam + ' team leaders:\n\n';
+        reply += CONSTANTS.TEAMLEADERS[newTeam].join('\n');
+        reply += '\n';
 	} else {
 		reply = message.member.displayName + ', please pick a correct team and type !team valor|mystic|instinct';
 	}

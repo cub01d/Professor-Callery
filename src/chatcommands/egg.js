@@ -39,7 +39,7 @@ const egg = (data, message) => {
 		message.channel.send(reply);
 		return reply;
 	}
-	
+
 	const tier = parseInt(msgSplit[1]);
 	if (isNaN(tier) || tier < 1 || tier > 5) {
 		reply = 'Sorry incorrect format. Ensure tier is a number between 1 and 5, use format:\n' + usage;
@@ -58,7 +58,7 @@ const egg = (data, message) => {
 		if(tier == 3) eggTag = ' <@&' + data.rolesByName['tier3'].id + '> ';
 		if(tier == 4) eggTag = ' <@&' + data.rolesByName['tier4'].id + '> ';
 	}
-	else tierEmoji = 'normalraid'; 
+	else tierEmoji = 'normalraid';
 
 	const channelName = message.channel.name;
 	const minutesLeft = parseInt(msgSplit[2]);
@@ -118,7 +118,7 @@ const egg = (data, message) => {
 
 		var roleName = data.GUILD.roles.get(role.id).name;
 		// todo : get rid of SF reference
-		if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'sf' && roleName !== 'allregions') {
+		if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'allregions') {
 			if (data.channelsByName['gymraids_' + roleName]) {
 				data.channelsByName['gymraids_' + roleName].send(forwardReply);
 			} else {
