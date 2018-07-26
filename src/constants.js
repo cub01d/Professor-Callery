@@ -3,27 +3,27 @@
 const Discord = require('discord.js');
 
 const regionsConfig = require('../config/regions.json');
-//const secrets = require('../config/secrets.json');
 const logger = require('../logger');
-const secrets =
-{
-  "discord": {
-    "token": process.env.DISCORD_TOKEN,
-    "BOTID": process.env.DISCORD_BOTID
-  },
-  "mysql": {
-    "host": process.env.MYSQL_HOST,
-    "user": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD,
-    "database": process.env.MYSQL_DB
-  },
-  "webhook": {
-    "log": {
-	  "id": process.env.WEBHOOK_ID,
-	  "token": process.env.WEBHOOK_TOKEN
-    }
-  }
-};
+const config = (process.env.USE_SECRETS_FILE) ?
+    require('./config/secrets.json') :
+    {
+      "discord": {
+        "token": process.env.DISCORD_TOKEN,
+        "BOTID": process.env.DISCORD_BOTID
+      },
+      "mysql": {
+        "host": process.env.MYSQL_HOST,
+        "user": process.env.MYSQL_USER,
+        "password": process.env.MYSQL_PASSWORD,
+        "database": process.env.MYSQL_DB
+      },
+      "webhook": {
+        "log": {
+          "id": process.env.WEBHOOK_ID,
+          "token": process.env.WEBHOOK_TOKEN
+        }
+      }
+    };
 
 String.prototype.capitalize = function () {
 	return this.charAt(0).toUpperCase() + this.slice(1);
