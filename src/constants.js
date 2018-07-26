@@ -4,8 +4,8 @@ const Discord = require('discord.js');
 
 const regionsConfig = require('../config/regions.json');
 const logger = require('../logger');
-const config = (process.env.USE_SECRETS_FILE) ?
-    require('./config/secrets.json') :
+const secrets = (process.env.USE_SECRETS_FILE) ?
+    require('../config/secrets.json') :
     {
       "discord": {
         "token": process.env.DISCORD_TOKEN,
