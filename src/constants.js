@@ -115,7 +115,10 @@ const data = {
 		'grazz': 'golden-razz'
 	},
 	NSFW_WORDS: [' fuck ', ' fucking ', ' fuckin ', ' shit ', ' shitty '],
-	PROTECTED_CHANNELS: ['start_here', 'professor_callery', 'announcements'], // todo : move to a config file
+    DEFAULT_CHANNEL: 'start_here',
+    COMMAND_CHANNEL: 'professor_callery',
+    ANNOUNCEMENT_CHANNEL: 'announcements',
+	PROTECTED_CHANNELS: [this.DEFAULT_CHANNEL, this.COMMAND_CHANNEL, this.ANNOUCEMENT_CHANNEL], // todo : move to a config file
 	PROTECTED_ROLES: ['admin', 'mod', 'dev', 'VIP', '@everyone', 'timeout_inthecorner'], // todo : move to a config file
 	PRIVILEGED_ROLES: ['admin', 'mod'],
 };
