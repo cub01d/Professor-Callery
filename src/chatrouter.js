@@ -13,25 +13,25 @@ const quest = require('./chatcommands/quest');
 const raid = require('./chatcommands/raid');
 const reset = require('./chatcommands/reset');
 const team = require('./chatcommands/team');
-const want = require('./chatcommands/want');
+//const want = require('./chatcommands/want');
 const wild = require('./chatcommands/wild');
 
 module.exports = (data) => {
-	return {
-		breakpoint: breakpoint(data),
-		checkNew: checkNew(data),
-//		counters: counters(data),
-//      cp: cp(data),
-		egg: egg(data),
-		help: help(data),
-//		hide: hide(data),
-		mod: mod(data),
-//		play: play(data),
-		quest: quest(data),
-		raid: raid(data),
-		reset: reset(data),
-		team: team(data),
-		want: want(data),
-		wild: wild(data),
-	};
+    return {
+        breakpoint: breakpoint(data),
+        checkNew: checkNew(data),
+        counters: counters(data),
+        cp: cp(data),
+        egg: egg(data),
+        help: help(data),
+//      hide: hide(data),
+        mod: mod(data),
+        play: play(data),
+        quest: quest(data),
+        raid: raid(data),
+        reset: reset(data),
+        team: team(data),
+//      want: want(data),
+        wild: wild(data),
+    };
 };
