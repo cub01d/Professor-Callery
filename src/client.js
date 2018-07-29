@@ -20,11 +20,7 @@ const getEmoji = (pokemon) => {
         emoji = 'hooh'; // special case for ho-oh
     }
     if (emojisByName[emoji]) {
-        //return '<:' + emoji + ':' + emojisByName[emoji].id + '>';
-        let line = '<:' + emoji + ':' + emojisByName[emoji].id + '>';
-        // TODO: remove this line after testing
-        console.log(line);
-        return line;
+        return '<:' + emoji + ':' + emojisByName[emoji].id + '>';
     }
     return '';
 };
@@ -83,9 +79,9 @@ client.on('message', (message, cb) => {
     // replace any multiple spaces with a single space
     while (message.content.indexOf('  ') > -1) {message.content = message.content.replace('  ', ' ');}
 
-    // TODO: remove support for play command
-    if (message.member && command !== '!play')    {CHATCOMMANDS.checkNew(message);}
-    logger.info({ event: `${message.member.displayName} was added to allregions` });
+    // remove support for play command
+    //if (message.member && command !== '!play') {CHATCOMMANDS.checkNew(message);}
+    if (message.member) CHATCOMMANDS.checkNew(message);
 
     // yell at non-privileged user if they misuse a tag
     CHATCOMMANDS.mod(message);
@@ -143,7 +139,7 @@ client.on('message', (message, cb) => {
 
     //Inside Professor Callery Channel, OK to touch message.member
     if (reply === '' && !message.member) {
-        message.channel.send('Member is a ' + getEmoji('gengar') + ' - Commands cannot be run for users who are invisible, please remove your invisible status');
+        message.channel.send('Member is invisible - Commands cannot be run for users who are invisible, please remove your invisible status');
         return;
     }
 
