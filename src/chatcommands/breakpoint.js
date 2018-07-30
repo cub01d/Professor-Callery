@@ -109,11 +109,11 @@ function calcBreakpoint(attacker, move, iv, defender) {
     var reply = "";
     var breakpoints = {};
     if (!pokeInfo) {
-    	reply = 'Sorry, I can\'t find that pokemon. Remember to enter the pokemon\'s exact name in the pokedex.\n'+usage;
+        reply = 'Sorry, I can\'t find that pokemon. Remember to enter the pokemon\'s exact name in the pokedex.\n'+usage;
         return reply;
     }
     if (!moveInfo) {
-    	reply = 'Sorry, I can\'t find that move. Remember to replace spaces with _ when typing a move.\n'+usage;
+        reply = 'Sorry, I can\'t find that move. Remember to replace spaces with _ when typing a move.\n'+usage;
         return reply;
     }
     for (var index in bosses) {
@@ -168,18 +168,18 @@ function getBosses(attacker) {
 }
 
 const getBreakpoint = (data, message) => {
-	let reply = '';
-	const msgSplit = message.content.toLowerCase().split(" ");
-	if (!msgSplit || msgSplit.length < 4) {
+    let reply = '';
+    const msgSplit = message.content.toLowerCase().split(" ");
+    if (!msgSplit || msgSplit.length < 4) {
         reply = 'Sorry, incorrect format.\n'+usage;
         message.channel.send(reply);
         return reply;
     }
-	const attacker = CONSTANTS.standardizePokemonName(msgSplit[1]);
+    const attacker = CONSTANTS.standardizePokemonName(msgSplit[1]);
     const move = msgSplit[2];
     const iv = msgSplit[3]; // check for int 0-15
     if (isNaN(iv) || iv > 15 || iv < 0) {
-		reply = "Sorry, IV must be 0-15.\n"+usage
+        reply = "Sorry, IV must be 0-15.\n"+usage
         message.channel.send(reply);
         return reply;
     }
@@ -188,11 +188,11 @@ const getBreakpoint = (data, message) => {
         defender = CONSTANTS.standardizePokemonName(msgSplit[4]);
     }
     reply = calcBreakpoint(attacker, move, iv, defender);
-    
-	message.channel.send(reply);
-	return reply;
+
+    message.channel.send(reply);
+    return reply;
 };
 
 module.exports = (data) => ( (message) => {
-	return getBreakpoint(data, message);
+    return getBreakpoint(data, message);
 });

@@ -1,7 +1,6 @@
 'use strict';
 
 const Discord = require('discord.js');
-
 const regionsConfig = require('../config/regions.json');
 const logger = require('../logger');
 const secrets = (process.env.USE_SECRETS_FILE) ?
@@ -55,15 +54,15 @@ const data = {
 	BOTID: secrets.discord.BOTID,
 	TEAMS: ['valor', 'instinct', 'mystic'],
 	MONS: [
-        'aerodactyl', 'anorith',
-        'bagon', 'beldum',
+        'aerodactyl', 'anorith', 'aron',
+        'bagon', 'beldum', 'blissey',
         'chansey', 'chimecho',
-        'ditto', 'dratini', 'dragonair', 'dragonite',
+        'ditto', 'dratini', 'dragonite',
         'feebas',
-        'girafarig',
+        'girafarig', 'grimer',
         'hitmonchan', 'hitmonlee', 'hitmontop',
         'larvitar', 'lileep', 'lotad', 'lunatone',
-        'mareep', 'miltank',
+        'machop', 'mareep', 'miltank',
         'onix',
         'porygon',
         'ralts',
@@ -74,14 +73,16 @@ const data = {
     ],
 	EGGTIERS: ['tier3', 'tier4', 'tier5'],
 	RAIDMONS: [
-        'absol', 'aexeggutor', 'amarowak', 'araichu',
+        'absol',
         'charmander',
         'donphan',
+        'exeggutor',
         'flareon',
         'houndoom',
         'kirlia',
-        'machamp', 'magikarp', 'magmar',  'makuhita', 'mawile', 'meditite',
+        'machamp', 'magikarp', 'magmar', 'makuhita', 'marowak', 'mawile', 'meditite',
         'porygon',
+        'raichu',
         'tyranitar',
     ],
 	LEGENDARYMONS: ['legendary',
