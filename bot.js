@@ -32,4 +32,7 @@ db.connect((err) => {
 	console.log('Database Connected!');
 }); */
 
-client.login(token);
+if (token)
+    client.login(token);
+else
+    console.log("Token is not defined.");
