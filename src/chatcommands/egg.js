@@ -1,36 +1,12 @@
 'use strict';
 
 const CONSTANTS = require('./../constants');
+const {format_time, removeTags} = require('../utils');
 
 const usage = 'Command usage: **!egg tier# minutesLeft [exgym] location details**';
 
-//Format a date object as a string in 12 hour format
-const format_time = (date_obj) => {
-    // formats a javascript Date object into a 12h AM/PM time string
-    var hour = date_obj.getHours();
-    var minute = date_obj.getMinutes();
-    const amPM = (hour > 11) ? 'pm' : 'am';
-    if(hour > 12) {
-        hour -= 12;
-    } else if(hour === 0) {
-        hour = '12';
-    }
-    if(minute < 10) {
-        minute = '0' + minute;
-    }
-    return hour + ':' + minute + amPM;
-};
 
-const removeTags = (html) => {
-    var oldHtml;
-    do {
-        oldHtml = html;
-        html = html.replace(CONSTANTS.tagOrComment, '');
-    } while (html !== oldHtml);
-    return html.replace(/</g, '&lt;');
-};
-
-const egg = (data, message) => {
+const egg = (data, message, raidcb) => {
     let reply = '';
 
     const msgSplit = message.content.toLowerCase().split(' ');
@@ -41,6 +17,7 @@ const egg = (data, message) => {
     }
 
     const tier = parseInt(msgSplit[1]);
+
     if (isNaN(tier) || tier < 1 || tier > 5) {
         reply = 'Sorry incorrect format. Ensure tier is a number between 1 and 5, use format:\n' + usage;
         message.channel.send(reply);
@@ -109,7 +86,7 @@ const egg = (data, message) => {
     if (data.channelsByName['gymraids_alerts']) {
         data.channelsByName['gymraids_alerts'].send(forwardReply);
     } else {
-        console.warn('Please add a channel called #gymraids_alerts'); // eslint-disable-line
+        console.warn('Please add a channel called #gymraids_alerts');
     }
 
     //send alert to regional alert channel
@@ -122,14 +99,32 @@ const egg = (data, message) => {
             if (data.channelsByName['gymraids_' + roleName]) {
                 data.channelsByName['gymraids_' + roleName].send(forwardReply);
             } else {
-                console.warn('Please add the channel gymraids_' + roleName); // eslint-disable-line
+                console.warn('Please add the channel gymraids_' + roleName);
             }
         }
     });
 
+    // if we haven't returned an error message yet
+    if(tier == 5) {
+        const details = msgSplit.slice(3).join(' ');
+        const raidmsg = '!raid '+ CONSTANTS.currentT5Boss + ' ' + CONSTANTS.eggDurationMins + ' ' + details;
+
+        // TODO remove after debug
+        console.log("running raid command\n\t" + raidmsg + "\nin " + minutesLeft + " minutes!");
+        if (raidcb)
+            setTimeout(raidcb(raidmsg), minutesLeft*60*1000);
+        else
+            console.log("raid command is undefined");
+
+
+    }
     return reply;
 };
 
 module.exports = (data) => ( (message) => {
     return egg(data, message);
 });
+
+// module.exports = (data, callback) => (callback) => ( (message) => {
+//     return egg(data, message, callback);
+// });

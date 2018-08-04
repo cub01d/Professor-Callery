@@ -7,19 +7,19 @@ const secrets = (process.env.PC_USE_SECRETS_FILE) ?
     require('../config/secrets.json') :
     {
       "discord": {
-        "token": process.env.DISCORD_TOKEN,
-        "BOTID": process.env.DISCORD_BOTID
+        "token": process.env.PC_DISCORD_TOKEN,
+        "BOTID": process.env.PC_DISCORD_BOTID
       },
       "mysql": {
-        "host": process.env.MYSQL_HOST,
-        "user": process.env.MYSQL_USER,
-        "password": process.env.MYSQL_PASSWORD,
-        "database": process.env.MYSQL_DB
+        "host": process.env.PC_MYSQL_HOST,
+        "user": process.env.PC_MYSQL_USER,
+        "password": process.env.PC_MYSQL_PASSWORD,
+        "database": process.env.PC_MYSQL_DB
       },
       "webhook": {
         "log": {
-          "id": process.env.WEBHOOK_ID,
-          "token": process.env.WEBHOOK_TOKEN
+          "id": process.env.PC_WEBHOOK_ID,
+          "token": process.env.PC_WEBHOOK_TOKEN
         }
       }
     };

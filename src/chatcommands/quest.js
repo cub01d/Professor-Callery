@@ -82,7 +82,7 @@ const quest = (data, message) => {
             if (data.channelsByName['quests_' + roleName]) {
                 data.channelsByName['quests_' + roleName].send(forwardReply);
             } else {
-                console.warn('Please add the channel quests_' + roleName); // eslint-disable-line
+                console.warn('Please add the channel quests_' + roleName); 
             }
         }
     });

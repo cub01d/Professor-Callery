@@ -55,7 +55,7 @@ client.on('ready', (done) => {
     if (done) {
         done();
     } else {
-        logger.info('Asynchronous data loaded!'); // eslint-disable-line
+        logger.info('Asynchronous data loaded!');
     }
 });
 
@@ -98,10 +98,13 @@ client.on('message', (message, cb) => {
             return reply;
         }
 
+        // handle command
+        logger.info({ event: `${message.member.displayName} said ${message.content} in ${message.channel.name}` });
         switch (command) {
             case '!raid':
                 return cb(CHATCOMMANDS.raid(message));
             case '!egg':
+                // TODO: return cb(CHATCOMMANDS.egg(message, cb(CHATCOMMANDS.raid) ));
                 return cb(CHATCOMMANDS.egg(message));
             case '!wild':
                 return cb(CHATCOMMANDS.wild(message));
@@ -124,6 +127,8 @@ client.on('message', (message, cb) => {
         return;
     }
 
+    // handle commmand
+    logger.info({ event: `${message.member.displayName} said ${message.content} in ${message.channel.name}` });
     switch(command) {
         case '!breakpoint':
         case '!bp':
@@ -143,7 +148,6 @@ client.on('message', (message, cb) => {
         return;
     }
 
-    logger.info({ event: `${message.member.displayName} said ${message.content} in ${message.channel.name}` });
 
     const errorMessage = 'Command not found: ' + command;
     logger.info({ event: `${command} was not understood `});

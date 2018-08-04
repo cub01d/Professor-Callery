@@ -2,34 +2,9 @@
 
 const pokemonInfo = require('../../data/pokemon.json');
 const CONSTANTS = require('./../constants');
+const {format_time, removeTags} = require('../utils');
 
 const usage = 'Command usage: **!raid boss minutesRemaining [exgym] location details**';
-
-//Format a date object as a string in 12 hour format
-const format_time = (date_obj) => {
-    // formats a javascript Date object into a 12h AM/PM time string
-    var hour = date_obj.getHours();
-    var minute = date_obj.getMinutes();
-    const amPM = (hour > 11) ? 'pm' : 'am';
-    if(hour > 12) {
-        hour -= 12;
-    } else if(hour === 0) {
-        hour = '12';
-    }
-    if(minute < 10) {
-        minute = '0' + minute;
-    }
-    return hour + ':' + minute + amPM;
-};
-
-const removeTags = (html) => {
-    var oldHtml;
-    do {
-        oldHtml = html;
-        html = html.replace(CONSTANTS.tagOrComment, '');
-    } while (html !== oldHtml);
-    return html.replace(/</g, '&lt;');
-};
 
 const raid = (data, message) => {
     let reply = '';
@@ -147,7 +122,7 @@ const raid = (data, message) => {
     if (data.channelsByName['gymraids_alerts']) {
         data.channelsByName['gymraids_alerts'].send(forwardReply);
     } else {
-        console.warn('Please add a channel called #gymraids_alerts'); // eslint-disable-line
+        console.warn('Please add a channel called #gymraids_alerts'); 
     }
 
     //send alert to regional alert channel
@@ -160,7 +135,7 @@ const raid = (data, message) => {
             if (data.channelsByName['gymraids_' + roleName]) {
                 data.channelsByName['gymraids_' + roleName].send(forwardReply);
             } else {
-                console.warn('Please add the channel gymraids_' + roleName); // eslint-disable-line
+                console.warn('Please add the channel gymraids_' + roleName); 
             }
         }
     });
