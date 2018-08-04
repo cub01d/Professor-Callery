@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const regionsConfig = require('../config/regions.json');
 const logger = require('../logger');
-const secrets = (process.env.USE_SECRETS_FILE) ?
+const secrets = (process.env.PC_USE_SECRETS_FILE) ?
     require('../config/secrets.json') :
     {
       "discord": {
@@ -50,6 +50,10 @@ const tagOrComment = new RegExp(
 	'gi');
 
 const data = {
+    egg2raid: (process.env.PC_EGG2RAID === 'true') ? true : false, // for legendary eggs
+    currentT5Boss: 'registeel', // only valid if there is only 1 current t5 boss
+    eggDurationMins: 45,
+
 	BOTNAME: 'Professor Callery',
 	BOTID: secrets.discord.BOTID,
 	TEAMS: ['valor', 'instinct', 'mystic'],
@@ -124,9 +128,9 @@ data.log = (msg) => {
 	if (webhook) {
 		webhook.send(msg)
 			.then()
-			.catch(err => logger.error({ event: `Error with webhook ${err.message}`})); // eslint-disable-line
+			.catch(err => logger.error({ event: `Error with webhook ${err.message}`}));
 	} else {
-		console.log(msg); // eslint-disable-line
+		console.log(msg);
 	}
 };
 
