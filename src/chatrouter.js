@@ -8,11 +8,11 @@ const egg = require('./chatcommands/egg');
 const help = require('./chatcommands/help');
 //const hide = require('./chatcommands/hide');
 const mod = require('./chatcommands/mod');
-const play = require('./chatcommands/play');
+//const play = require('./chatcommands/play');
 const quest = require('./chatcommands/quest');
 const raid = require('./chatcommands/raid');
 const reset = require('./chatcommands/reset');
-const team = require('./chatcommands/team');
+//const team = require('./chatcommands/team');
 //const want = require('./chatcommands/want');
 const wild = require('./chatcommands/wild');
 
@@ -26,11 +26,11 @@ module.exports = (data) => {
         help: help(data),
 //      hide: hide(data),
         mod: mod(data),
-        play: play(data),
+        //play: play(data),
         quest: quest(data),
         raid: raid(data),
         reset: reset(data),
-        team: team(data),
+        //team: team(data),
 //      want: want(data),
         wild: wild(data),
     };

@@ -43,7 +43,7 @@ const quest = (data, message) => {
         //  detail = detail.substring(detail.toLowerCase().indexOf('candy') + 6);
     }
     else if (tms.indexOf(reward) > -1) {
-        reward = 'technical_machine';
+        reward = 'tm';
         //if (detail.toLowerCase().indexOf('tm ') > -1)
         //  detail = detail.substring(detail.toLowerCase().indexOf('tm ') + 3)
     }
@@ -82,7 +82,7 @@ const quest = (data, message) => {
             if (data.channelsByName['quests_' + roleName]) {
                 data.channelsByName['quests_' + roleName].send(forwardReply);
             } else {
-                console.warn('Please add the channel quests_' + roleName); 
+                console.warn('Please add the channel quests_' + roleName);
             }
         }
     });

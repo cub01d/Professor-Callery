@@ -9,6 +9,6 @@
   },
   "region_neighborhoods": {
     "campus-iv": ["ucsb-campus", "isla-vista"],
-    "goleta": ["ellwood-devereux"]
+    "goleta": ["west-goleta", "east-goleta"]
   }
 }

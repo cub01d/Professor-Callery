@@ -7,7 +7,7 @@ const resetRoles = (data, message) => {
 
     if (message.member.roles) {
         var found = false;
-        //reset user roles
+        // reset user roles
         message.member.roles.forEach( (role) => {
             if (CONSTANTS.PROTECTED_ROLES.indexOf(role.name) == -1) {
                 if(!found) reply = '\n' + message.member.displayName + ', I am removing the following roles:\n';

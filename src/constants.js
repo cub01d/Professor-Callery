@@ -3,23 +3,23 @@
 const Discord = require('discord.js');
 const regionsConfig = require('../config/regions.json');
 const logger = require('../logger');
-const secrets = (process.env.PC_USE_SECRETS_FILE) ?
+const secrets = (process.env.USE_SECRETS_FILE) ?
     require('../config/secrets.json') :
     {
       "discord": {
-        "token": process.env.PC_DISCORD_TOKEN,
-        "BOTID": process.env.PC_DISCORD_BOTID
+        "token": process.env.DISCORD_TOKEN,
+        "BOTID": process.env.DISCORD_BOTID
       },
       "mysql": {
-        "host": process.env.PC_MYSQL_HOST,
-        "user": process.env.PC_MYSQL_USER,
-        "password": process.env.PC_MYSQL_PASSWORD,
-        "database": process.env.PC_MYSQL_DB
+        "host": process.env.MYSQL_HOST,
+        "user": process.env.MYSQL_USER,
+        "password": process.env.MYSQL_PASSWORD,
+        "database": process.env.MYSQL_DB
       },
       "webhook": {
         "log": {
-          "id": process.env.PC_WEBHOOK_ID,
-          "token": process.env.PC_WEBHOOK_TOKEN
+          "id": process.env.WEBHOOK_ID,
+          "token": process.env.WEBHOOK_TOKEN
         }
       }
     };
@@ -50,7 +50,7 @@ const tagOrComment = new RegExp(
 	'gi');
 
 const data = {
-    egg2raid: (process.env.PC_EGG2RAID === 'true') ? true : false, // for legendary eggs
+    egg2raid: (process.env.EGG2RAID === 'true') ? true : false, // for legendary eggs
     currentT5Boss: 'registeel', // only valid if there is only 1 current t5 boss
     eggDurationMins: 45,
 
@@ -65,7 +65,7 @@ const data = {
         'feebas',
         'girafarig', 'grimer',
         'hitmonchan', 'hitmonlee', 'hitmontop',
-        'larvitar', 'lileep', 'lotad', 'lunatone',
+        'lapras', 'larvitar', 'lileep', 'lotad', 'lunatone',
         'machop', 'mareep', 'miltank',
         'onix',
         'porygon',
@@ -87,20 +87,20 @@ const data = {
         'machamp', 'magikarp', 'magmar', 'makuhita', 'marowak', 'mawile', 'meditite',
         'porygon',
         'raichu',
-        'tyranitar',
+        'tyranitar'
     ],
 	LEGENDARYMONS: ['legendary',
         'articuno', 'zapdos', 'moltres', 'mew', 'mewtwo',
         'lugia', 'ho-oh', 'celebi', 'raikou', 'entei', 'suicune',
         'regirock', 'regice', 'registeel', 'latias', 'latios', 'kyogre', 'groudon', 'rayquaza', 'jirachi', 'deoxys'
     ],
-	SPECIALMONS: ['highiv', 'finalevo'],
+	SPECIALMONS: ['highiv', 'finalevo', 'shinycheck'],
 	SPECIALRAIDS: ['exgym'],
-	QUESTREWARDS: ['golden-razz', 'rarecandy', 'shinycheck', 'stardust', 'technical_machine'],
+	QUESTREWARDS: ['golden-razz', 'rarecandy', 'stardust', 'tm'],
 	REGIONS: regionsConfig.regions,
 	COMMON_MISSPELLINGS: {
-        'raichu':'araichu',
-        'aexeggutor':'exeggutor',
+        //'raichu':'araichu',
+        //'aexeggutor':'exeggutor',
 		'hooh': 'ho-oh',
 		'milktank': 'miltank',
 		'ttar': 'tyranitar',
@@ -109,17 +109,15 @@ const data = {
 		'chancey': 'chansey',
 		'tyrannitar': 'tyranitar',
 		'slakoff': 'slakoth',
-		'tm': 'technical_machine',
-		'chargetm': 'technical_machine',
-		'fasttm': 'technical_machine',
+		'chargetm': 'tm',
+		'fasttm': 'tm',
 		'grazz': 'golden-razz'
 	},
-	NSFW_WORDS: [' fuck ', ' fucking ', ' fuckin ', ' shit ', ' shitty '],
     DEFAULT_CHANNEL: 'start_here',
     COMMAND_CHANNEL: 'professor_callery',
     ANNOUNCEMENT_CHANNEL: 'announcements',
 	PROTECTED_CHANNELS: [this.DEFAULT_CHANNEL, this.COMMAND_CHANNEL, this.ANNOUCEMENT_CHANNEL], // todo : move to a config file
-	PROTECTED_ROLES: ['admin', 'mod', 'dev', 'VIP', '@everyone', 'timeout_inthecorner'], // todo : move to a config file
+	PROTECTED_ROLES: ['admin', 'mod', 'dev', 'VIP', '@everyone', 'timeout_inthecorner', 'allregions', 'valor', 'mystic', 'instinct', 'verified'], // todo : move to a config file
 	PRIVILEGED_ROLES: ['admin', 'mod'],
 };
 

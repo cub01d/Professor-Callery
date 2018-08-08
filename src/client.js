@@ -140,6 +140,8 @@ client.on('message', (message, cb) => {
             return cb(CHATCOMMANDS.counters(message));
         case '!help':
             return cb(CHATCOMMANDS.help(message));
+        case '!reset':
+            return cb(CHATCOMMANDS.reset(message));
     }
 
     //Inside Professor Callery Channel, OK to touch message.member
