@@ -53,7 +53,8 @@ const wild = (data, message) => {
     // handle special tags
     if (message.content.indexOf('shiny') > -1) {
         data.GUILD.roles.forEach((role) => {
-            if (role.name === 'shinycheck') detail += ' <@&' + role.id + '> ' + data.getEmoji('shiny');
+            //if (role.name === 'shinycheck') detail += ' <@&' + role.id + '> ' + data.getEmoji('sparkles');
+            if (role.name === 'shinycheck') detail += ' <@&' + role.id + '> ✨';
         });
     }
     if (message.content.indexOf('finalevo') > -1) {
@@ -69,14 +70,15 @@ const wild = (data, message) => {
 
     reply = 'Wild **' + pokemonTag.toUpperCase() + '** ' + data.getEmoji(pokemonName) + ' at ' + detail + ' added by ' + message.member.displayName;
     message.channel.send(reply);
-    let forwardReply = '- **' + pokemonName.toUpperCase() + '** ' + data.getEmoji(pokemonName) + ' reported in the wild in ' + data.channelsByName[message.channel.name] + ' at ' + detail;
 
-    if(!data.channelsByName['missing_dex'])
-        console.log('Please create a channel called missing_dex to allow the !wild function to work');
-    else if (message.channel.name !== 'missing_dex') {
-        data.channelsByName['missing_dex'].send(forwardReply);
+    // forward alert only if not testing
+    if (channelName !== CONSTANTS.TESTING_CHANNEL) {
+        let forwardReply = '- **' + pokemonName.toUpperCase() + '** ' + data.getEmoji(pokemonName) + ' reported in the wild in ' + data.channelsByName[message.channel.name] + ' at ' + detail;
+
+        if (message.channel.name !== CONSTANTS.DEX_CHANNEL) {
+            data.channelsByName[CONSTANTS.DEX_CHANNEL].send(forwardReply);
+        }
     }
-
     return reply;
 };
 

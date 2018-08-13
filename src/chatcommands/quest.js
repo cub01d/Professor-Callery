@@ -17,6 +17,7 @@ const quest = (data, message) => {
     let inNeighborhood = false;
     let usage = 'Command usage: **!quest reward [tags] task location** *(rewards: tm, pokemon/wild (if not sure), rarecandy)';
 
+    const channelName = message.channel.name;
     const msgSplit = message.content.toLowerCase().split(' ');
     if (!msgSplit || msgSplit.length < 3) {
         reply = 'Sorry, incorrect format.\n'+usage;
@@ -61,9 +62,11 @@ const quest = (data, message) => {
     //check to see if the message contains a mention of 'shiny'
     if (message.content.indexOf('shiny') > -1) {
         data.GUILD.roles.forEach((role) => {
-            if (role.name === 'shinycheck') rewardTag += ' <@&' + role.id + '> ' + data.getEmoji('shiny'); //require a role called shinycheck
+            //if (role.name === 'shinycheck') rewardTag += ' <@&' + role.id + '> ' + data.getEmoji(':sparkles:');
+            if (role.name === 'shinycheck') rewardTag += ' <@&' + role.id + '> ✨'; //require a role called shinycheck
         });
     }
+
 
     if (detail.length > 255) {
         detail = detail.substring(0,255);
@@ -71,28 +74,31 @@ const quest = (data, message) => {
 
     reply = '**QUEST ' + rewardTag.toUpperCase() + '** ' + data.getEmoji(reward) + '\nDetails: ' + detail + ' added by ' + message.member.displayName;
     message.channel.send(reply);
-    let forwardReply = '- **' + rewardTag.toUpperCase() + '** ' + data.getEmoji(reward) + ' reported in ' + data.channelsByName[message.channel.name] + ' at ' + detail;
 
-    message.channel.permissionOverwrites.forEach((role) => {
-        if (role.type !== 'role') return;
+    // forward alert to other channels if not in testing
+    if (channelName !== CONSTANTS.TESTING_CHANNEL) {
+        let forwardReply = '- **' + rewardTag.toUpperCase() + '** ' + data.getEmoji(reward) + ' reported in ' + data.channelsByName[channelName] + ' at ' + detail;
 
-        var roleName = data.GUILD.roles.get(role.id).name;
-        // todo : get rid of SF reference
-        if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'sf' && roleName !== 'allregions') {
-            if (data.channelsByName['quests_' + roleName]) {
-                data.channelsByName['quests_' + roleName].send(forwardReply);
-            } else {
-                console.warn('Please add the channel quests_' + roleName);
+        message.channel.permissionOverwrites.forEach((role) => {
+            if (role.type !== 'role') return;
+
+            var roleName = data.GUILD.roles.get(role.id).name;
+            // todo : get rid of SF reference
+            if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'sf' && roleName !== 'allregions') {
+                if (data.channelsByName['quests_' + roleName]) {
+                    data.channelsByName['quests_' + roleName].send(forwardReply);
+                } else {
+                    console.warn('Please add the channel quests_' + roleName);
+                }
             }
+        });
+
+        if(!data.channelsByName['quests_alerts'])
+            console.log('Please create a channel called quests_alerts to allow the !quest function to work');
+        else if (channelName !== 'quests_alerts') {
+            data.channelsByName['quests_alerts'].send(forwardReply);
         }
-    });
-
-    if(!data.channelsByName['quests_alerts'])
-        console.log('Please create a channel called quests_alerts to allow the !quest function to work');
-    else if (message.channel.name !== 'quests_alerts') {
-        data.channelsByName['quests_alerts'].send(forwardReply);
     }
-
     return reply;
 };
 

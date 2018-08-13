@@ -6,20 +6,20 @@ const logger = require('../logger');
 const secrets = (process.env.USE_SECRETS_FILE) ?
     require('../config/secrets.json') :
     {
-      "discord": {
-        "token": process.env.DISCORD_TOKEN,
-        "BOTID": process.env.DISCORD_BOTID
+      'discord': {
+        'token': process.env.DISCORD_TOKEN,
+        'BOTID': process.env.DISCORD_BOTID
       },
-      "mysql": {
-        "host": process.env.MYSQL_HOST,
-        "user": process.env.MYSQL_USER,
-        "password": process.env.MYSQL_PASSWORD,
-        "database": process.env.MYSQL_DB
+      'mysql': {
+        'host': process.env.MYSQL_HOST,
+        'user': process.env.MYSQL_USER,
+        'password': process.env.MYSQL_PASSWORD,
+        'database': process.env.MYSQL_DB
       },
-      "webhook": {
-        "log": {
-          "id": process.env.WEBHOOK_ID,
-          "token": process.env.WEBHOOK_TOKEN
+      'webhook': {
+        'log': {
+          'id': process.env.WEBHOOK_ID,
+          'token': process.env.WEBHOOK_TOKEN
         }
       }
     };
@@ -61,7 +61,7 @@ const data = {
         'aerodactyl', 'anorith', 'aron',
         'bagon', 'beldum', 'blissey',
         'chansey', 'chimecho',
-        'ditto', 'dratini', 'dragonite',
+        'ditto', 'dratini', 'dragonair', 'dragonite',
         'feebas',
         'girafarig', 'grimer',
         'hitmonchan', 'hitmonlee', 'hitmontop',
@@ -70,7 +70,7 @@ const data = {
         'onix',
         'porygon',
         'ralts',
-        'scyther', 'slakoth',
+        'scyther', 'slakoth', 'snorlax',
         'tauros', 'togetic', 'trapinch',
         'unown',
 		'wailmer'
@@ -96,11 +96,9 @@ const data = {
     ],
 	SPECIALMONS: ['highiv', 'finalevo', 'shinycheck'],
 	SPECIALRAIDS: ['exgym'],
-	QUESTREWARDS: ['golden-razz', 'rarecandy', 'stardust', 'tm'],
+	QUESTREWARDS: ['golden-razz', 'rarecandy', 'spinda', 'stardust', 'tm'],
 	REGIONS: regionsConfig.regions,
 	COMMON_MISSPELLINGS: {
-        //'raichu':'araichu',
-        //'aexeggutor':'exeggutor',
 		'hooh': 'ho-oh',
 		'milktank': 'miltank',
 		'ttar': 'tyranitar',
@@ -115,9 +113,11 @@ const data = {
 	},
     DEFAULT_CHANNEL: 'start_here',
     COMMAND_CHANNEL: 'professor_callery',
+    TESTING_CHANNEL: 'admin-testing',
+    DEX_CHANNEL: 'missing_dex',
     ANNOUNCEMENT_CHANNEL: 'announcements',
 	PROTECTED_CHANNELS: [this.DEFAULT_CHANNEL, this.COMMAND_CHANNEL, this.ANNOUCEMENT_CHANNEL], // todo : move to a config file
-	PROTECTED_ROLES: ['admin', 'mod', 'dev', 'VIP', '@everyone', 'timeout_inthecorner', 'allregions', 'valor', 'mystic', 'instinct', 'verified'], // todo : move to a config file
+	PROTECTED_ROLES: ['admin', 'mod', 'dev', 'VIP', '@everyone', 'timeout_inthecorner', 'allregions', 'valor', 'mystic', 'instinct', 'unverified', 'verified!'], // todo : move to a config file
 	PRIVILEGED_ROLES: ['admin', 'mod'],
 };
 

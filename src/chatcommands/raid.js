@@ -81,9 +81,11 @@ const raid = (data, message) => {
         }
     }
 
+    // TODO: auto shiny tag db lookup
     if (message.content.indexOf('shiny') > -1) {
         data.GUILD.roles.forEach((role) => {
-            if (role.name === 'shinycheck') specialRaidTag += ' <@&' + role.id + '> ' + data.getEmoji('shiny');
+            //if (role.name === 'shinycheck') specialRaidTag += ' <@&' + role.id + '> ' + data.getEmoji('sparkles');
+            if (role.name === 'shinycheck') specialRaidTag += ' <@&' + role.id + '> ✨';
         });
     }
 
@@ -117,28 +119,33 @@ const raid = (data, message) => {
     reply = bossTag + legendaryTag + ' raid reported to ' + data.channelsByName['gymraids_alerts'] + ' (ending: ' + twelveHrDate + ') at ' +
         detail + specialRaidTag + ' added by ' + message.member.displayName;
     message.channel.send(reply);
-    let forwardReply = '- **' + boss.toUpperCase() + '** ' + data.getEmoji(boss) + ' raid reported in ' + data.channelsByName[channelName] + ' ending at ' + twelveHrDate + ' at ' + detail;
-    //send alert to #gymraids_alerts channel
-    if (data.channelsByName['gymraids_alerts']) {
-        data.channelsByName['gymraids_alerts'].send(forwardReply);
-    } else {
-        console.warn('Please add a channel called #gymraids_alerts'); 
-    }
 
-    //send alert to regional alert channel
-    message.channel.permissionOverwrites.forEach((role) => {
-        if (role.type !== 'role') return;
 
-        var roleName = data.GUILD.roles.get(role.id).name;
-        // todo : get rid of SF reference
-        if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'sf' && roleName !== 'allregions') {
-            if (data.channelsByName['gymraids_' + roleName]) {
-                data.channelsByName['gymraids_' + roleName].send(forwardReply);
-            } else {
-                console.warn('Please add the channel gymraids_' + roleName); 
-            }
+    // forward alert to other channels if message is not testing
+    if (channelName !== CONSTANTS.TESTING_CHANNEL) {
+        let forwardReply = '- **' + boss.toUpperCase() + '** ' + data.getEmoji(boss) + ' raid reported in ' + data.channelsByName[channelName] + ' ending at ' + twelveHrDate + ' at ' + detail;
+        //send alert to #gymraids_alerts channel
+        if (data.channelsByName['gymraids_alerts']) {
+            data.channelsByName['gymraids_alerts'].send(forwardReply);
+        } else {
+            console.warn('Please add a channel called #gymraids_alerts');
         }
-    });
+
+        //send alert to regional alert channel
+        message.channel.permissionOverwrites.forEach((role) => {
+            if (role.type !== 'role') return;
+
+            var roleName = data.GUILD.roles.get(role.id).name;
+            // todo : get rid of SF reference
+            if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'sf' && roleName !== 'allregions') {
+                if (data.channelsByName['gymraids_' + roleName]) {
+                    data.channelsByName['gymraids_' + roleName].send(forwardReply);
+                } else {
+                    console.warn('Please add the channel gymraids_' + roleName);
+                }
+            }
+        });
+    }
 
     return reply;
 };

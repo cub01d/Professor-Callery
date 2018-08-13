@@ -6,7 +6,7 @@ const {format_time, removeTags} = require('../utils');
 const usage = 'Command usage: **!egg tier# minutesLeft [exgym] location details**';
 
 
-const egg = (data, message, raidcb) => {
+const egg = (data, message) => {
     let reply = '';
 
     const msgSplit = message.content.toLowerCase().split(' ');
@@ -78,45 +78,48 @@ const egg = (data, message, raidcb) => {
         detail = detail.substring(0,255);
     }
 
+    // TODO testing
+
     reply = eggTag + ' raid egg reported to ' + data.channelsByName['gymraids_alerts'] + ' (hatching: ' + twelveHrDate + ') at ' +
         detail + specialRaidTag + ' added by ' + message.member.displayName;
     message.channel.send(reply);
-    let forwardReply = '- **Tier ' + tier + '** ' + data.getEmoji(tierEmoji) + ' egg reported in ' + data.channelsByName[channelName] + ' hatching at ' + twelveHrDate + ' at ' + detail;
-    //send alert to #gymraids_alerts channel
-    if (data.channelsByName['gymraids_alerts']) {
-        data.channelsByName['gymraids_alerts'].send(forwardReply);
-    } else {
-        console.warn('Please add a channel called #gymraids_alerts');
-    }
 
-    //send alert to regional alert channel
-    message.channel.permissionOverwrites.forEach((role) => {
-        if (role.type !== 'role') return;
-
-        var roleName = data.GUILD.roles.get(role.id).name;
-        // todo : get rid of SF reference
-        if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'allregions') {
-            if (data.channelsByName['gymraids_' + roleName]) {
-                data.channelsByName['gymraids_' + roleName].send(forwardReply);
-            } else {
-                console.warn('Please add the channel gymraids_' + roleName);
-            }
+    // forward alert to other channels if not in testing
+    if (channelName !== CONSTANTS.TESTING_CHANNEL) {
+        let forwardReply = '- **Tier ' + tier + '** ' + data.getEmoji(tierEmoji) + ' egg reported in ' + data.channelsByName[channelName] + ' hatching at ' + twelveHrDate + ' at ' + detail;
+        //send alert to #gymraids_alerts channel
+        if (data.channelsByName['gymraids_alerts']) {
+            data.channelsByName['gymraids_alerts'].send(forwardReply);
+        } else {
+            console.warn('Please add a channel called #gymraids_alerts');
         }
-    });
 
-    // if we haven't returned an error message yet
-    if(tier == 5) {
-        const details = msgSplit.slice(3).join(' ');
-        const raidmsg = '!raid '+ CONSTANTS.currentT5Boss + ' ' + CONSTANTS.eggDurationMins + ' ' + details;
+        //send alert to regional alert channel
+        message.channel.permissionOverwrites.forEach((role) => {
+            if (role.type !== 'role') return;
 
-        // TODO remove after debug
-        console.log("running raid command\n\t" + raidmsg + "\nin " + minutesLeft + " minutes!");
-        if (raidcb)
-            setTimeout(raidcb(raidmsg), minutesLeft*60*1000);
-        else
-            console.log("raid command is undefined");
+            var roleName = data.GUILD.roles.get(role.id).name;
+            // todo : get rid of SF reference
+            if (CONSTANTS.REGIONS.indexOf(roleName) > -1 && roleName !== 'allregions') {
+                if (data.channelsByName['gymraids_' + roleName]) {
+                    data.channelsByName['gymraids_' + roleName].send(forwardReply);
+                } else {
+                    console.warn('Please add the channel gymraids_' + roleName);
+                }
+            }
+        });
 
+        // if we haven't returned an error message yet
+        if(CONSTANTS.egg2raid && tier == 5) {
+            const details = msgSplit.slice(3).join(' ');
+            const command = '!raid '+ CONSTANTS.currentT5Boss + ' ' + CONSTANTS.eggDurationMins + ' ' + details;
 
+            // TODO remove after debug
+            console.log("running raid command '" + command + "' in " + minutesLeft + " minutes!");
+            // TODO new egg 2 raid
+            //setTimeout(raidcb(data, message), minutesLeft*60*1000);
+            //setTimeout(raidcb(data, message), minutesLeft*60*1000);
+        }
     }
     return reply;
 };
@@ -124,6 +127,21 @@ const egg = (data, message, raidcb) => {
 module.exports = (data) => ( (message) => {
     return egg(data, message);
 });
+
+// TODO: remove after testing
+//module.exports = function(data) {
+//    let innerFunc = function(message, cb) {
+//        console.log("generating reply");
+//        let reply = egg(data, message, cb);
+//        console.log("sending reply");
+//        return reply;
+//    }
+//    return innerFunc;
+//}
+
+
+
+
 
 // module.exports = (data, callback) => (callback) => ( (message) => {
 //     return egg(data, message, callback);

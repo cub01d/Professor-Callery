@@ -17,6 +17,7 @@ const checkNew = (data, message) => {
 
     if (grantAll) {
         message.member.addRole(data.rolesByName['allregions']);
+        message.member.addRole(data.rolesByName['unverified']);
         reply = 'Welcome ' + message.member.displayName + ' - Please read discord rules and learn bot commands in ' + data.channelsByName[CONSTANTS.DEFAULT_CHANNEL] + ' before doing anything. Run bot commands in ' + data.channelsByName[CONSTANTS.COMMAND_CHANNEL]  + ' and type **!help** for more information.'; message.channel.send(reply);
     }
 

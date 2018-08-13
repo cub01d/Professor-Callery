@@ -6,20 +6,20 @@ const client = require('./src/client');
 const config = (process.env.USE_SECRETS_FILE) ?
     require('./config/secrets.json') :
     {
-      "discord": {
-        "token": process.env.DISCORD_TOKEN,
-        "BOTID": process.env.DISCORD_BOTID
+      'discord': {
+        'token': process.env.DISCORD_TOKEN,
+        'BOTID': process.env.DISCORD_BOTID
       },
-      "mysql": {
-        "host": process.env.MYSQL_HOST,
-        "user": process.env.MYSQL_USER,
-        "password": process.env.MYSQL_PASSWORD,
-        "database": process.env.MYSQL_DB
+      'mysql': {
+        'host': process.env.MYSQL_HOST,
+        'user': process.env.MYSQL_USER,
+        'password': process.env.MYSQL_PASSWORD,
+        'database': process.env.MYSQL_DB
       },
-      "webhook": {
-        "log": {
-          "id": process.env.WEBHOOK_ID,
-          "token": process.env.WEBHOOK_TOKEN
+      'webhook': {
+        'log': {
+          'id': process.env.WEBHOOK_ID,
+          'token': process.env.WEBHOOK_TOKEN
         }
       }
     };
@@ -35,4 +35,4 @@ db.connect((err) => {
 if (token)
     client.login(token);
 else
-    console.log("Token is not defined.");
+    console.log('Token is not defined.');

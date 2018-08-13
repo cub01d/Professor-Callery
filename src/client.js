@@ -60,7 +60,7 @@ client.on('ready', (done) => {
 });
 
 client.on('message', (message, cb) => {
-    if (!cb) cb = data => {return data;};
+    if (!cb) cb = data => {return data};
 
     // no action on my own message
     if ((message.member && message.member.id === CONSTANTS.BOTID) ||
@@ -70,9 +70,6 @@ client.on('message', (message, cb) => {
         message.channel.send('I currently have no direct message functions. Please go to channel #' + CONSTANTS.DEFAULT_CHANNEL + '.');
         return;
     }
-
-    // TODO: REMOVE AFTER TESTING
-    //if (message.channel.name !== 'admin-testing') return;
 
     let reply = '';
     const command = message.content.split(' ')[0].toLowerCase();
@@ -104,7 +101,6 @@ client.on('message', (message, cb) => {
             case '!raid':
                 return cb(CHATCOMMANDS.raid(message));
             case '!egg':
-                // TODO: return cb(CHATCOMMANDS.egg(message, cb(CHATCOMMANDS.raid) ));
                 return cb(CHATCOMMANDS.egg(message));
             case '!wild':
                 return cb(CHATCOMMANDS.wild(message));

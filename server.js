@@ -6,46 +6,51 @@ const SwitchRouter = require('./routes/switch');
 const logger = require('./logger');
 const http = require('http');
 
+const config = (process.env.USE_SECRETS_FILE) ?
+    require('./config/secrets.json') :
+    {
+      'discord': {
+        'token': process.env.DISCORD_TOKEN,
+        'BOTID': process.env.DISCORD_BOTID
+      },
+      'mysql': {
+        'host': process.env.MYSQL_HOST,
+        'user': process.env.MYSQL_USER,
+        'password': process.env.MYSQL_PASSWORD,
+        'database': process.env.MYSQL_DB
+      },
+      'webhook': {
+        'log': {
+          'id': process.env.WEBHOOK_ID,
+          'token': process.env.WEBHOOK_TOKEN
+        }
+      },
+      'server': {
+          'webroot': process.env.WEBAPP_ROOT
+      }
+    };
+
+const token = config.discord.token;
+const PORT = process.env.PORT || 3000;
+
 // prevent heroku dyno from going idle
 var uptime = 0;
 var millis = 900000;
 setInterval(function() {
-    http.get("http://professor-callery.herokuapp.com/" + uptime);
+    http.get(config.server.webroot + uptime);
     uptime += 0.25;
-    logger.info("Uptime: " + uptime + " hours");
+    logger.info('Uptime: ' + uptime + ' hours');
 }, millis);
-
-const config = (process.env.USE_SECRETS_FILE) ?
-    require('./config/secrets.json') :
-    {
-      "discord": {
-        "token": process.env.DISCORD_TOKEN,
-        "BOTID": process.env.DISCORD_BOTID
-      },
-      "mysql": {
-        "host": process.env.MYSQL_HOST,
-        "user": process.env.MYSQL_USER,
-        "password": process.env.MYSQL_PASSWORD,
-        "database": process.env.MYSQL_DB
-      },
-      "webhook": {
-        "log": {
-          "id": process.env.WEBHOOK_ID,
-          "token": process.env.WEBHOOK_TOKEN
-        }
-      }
-    };
-
-const { token } = config.discord;
-const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
 
 app.use('/switch', SwitchRouter);
-client.login(token);
-
+if (token)
+    client.login(token);
+else
+    console.log('Token is not defined.');
 
 app.listen(PORT, () => {
 	logger.info(`Listening on ${PORT}`);
