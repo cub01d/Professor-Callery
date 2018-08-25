@@ -127,22 +127,3 @@ const egg = (data, message) => {
 module.exports = (data) => ( (message) => {
     return egg(data, message);
 });
-
-// TODO: remove after testing
-//module.exports = function(data) {
-//    let innerFunc = function(message, cb) {
-//        console.log("generating reply");
-//        let reply = egg(data, message, cb);
-//        console.log("sending reply");
-//        return reply;
-//    }
-//    return innerFunc;
-//}
-
-
-
-
-
-// module.exports = (data, callback) => (callback) => ( (message) => {
-//     return egg(data, message, callback);
-// });

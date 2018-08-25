@@ -51,7 +51,7 @@ const tagOrComment = new RegExp(
 
 const data = {
     egg2raid: (process.env.EGG2RAID === 'true') ? true : false, // for legendary eggs
-    currentT5Boss: 'registeel', // only valid if there is only 1 current t5 boss
+    currentT5Boss: 'hooh', // only valid if there is only 1 current t5 boss
     eggDurationMins: 45,
 
 	BOTNAME: 'Professor Callery',
@@ -67,25 +67,20 @@ const data = {
         'hitmonchan', 'hitmonlee', 'hitmontop',
         'lapras', 'larvitar', 'lileep', 'lotad', 'lunatone',
         'machop', 'mareep', 'miltank',
-        'onix',
-        'porygon',
+        'onix',,
         'ralts',
         'scyther', 'slakoth', 'snorlax',
         'tauros', 'togetic', 'trapinch',
         'unown',
-		'wailmer'
     ],
 	EGGTIERS: ['tier3', 'tier4', 'tier5'],
 	RAIDMONS: [
         'absol',
-        'charmander',
         'donphan',
         'exeggutor',
-        'flareon',
         'houndoom',
         'kirlia',
-        'machamp', 'magikarp', 'magmar', 'makuhita', 'marowak', 'mawile', 'meditite',
-        'porygon',
+        'machamp', 'magmar', 'marowak', 'mawile',
         'raichu',
         'tyranitar'
     ],

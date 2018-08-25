@@ -1,8 +1,6 @@
 ### Summary ###
 This is a fork of the Professor Redwood bot for the UCSB/IV/Goleta area.
 
-Professor Redwood has arrived from the California Bay Area. He will help you run your local discord communities for Pokemon GO. See our bot in action on the SF PoGo Raids Meetup https://discord.gg/9MJdRZm
-
 ### How do I contribute? ###
 Create an issue/discussion, and make a pull request!
 
