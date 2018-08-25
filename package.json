@@ -17,8 +17,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "bot": "node bot.js",
-    "server": "node server.js"
+    "start": "node bot.js"
   },
   "keywords": [],
   "author": "",
