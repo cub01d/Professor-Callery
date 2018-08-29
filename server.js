@@ -33,13 +33,13 @@ const config = (process.env.USE_SECRETS_FILE) ?
 const token = config.discord.token;
 const PORT = process.env.PORT || 3000;
 
-// prevent heroku dyno from going idle
+// prevent glitch app from going idle
 var uptime = 0;
-var millis = 900000;
+var millis = 300000;
 setInterval(function() {
     http.get(config.server.webroot + uptime);
-    uptime += 0.25;
-    logger.info('Uptime: ' + uptime + ' hours');
+    uptime += 5;
+    logger.info('Uptime: ' + uptime + ' minutes');
 }, millis);
 
 app.use(cors());
