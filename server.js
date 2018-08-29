@@ -64,3 +64,8 @@ process.on('unhandledRejection', function(reason, p) {
 		reason
 	);
 });
+
+process.on("SIGTERM", function () {
+    logger.info('Received SIGTERM, shutting down...');
+    process.exit(0);
+});
