@@ -72,7 +72,7 @@ const wild = (data, message) => {
     message.channel.send(reply);
 
     // forward alert only if not testing
-    if (channelName !== CONSTANTS.TESTING_CHANNEL) {
+    if (message.channel.name !== CONSTANTS.TESTING_CHANNEL) {
         let forwardReply = '- **' + pokemonName.toUpperCase() + '** ' + data.getEmoji(pokemonName) + ' reported in the wild in ' + data.channelsByName[message.channel.name] + ' at ' + detail;
 
         if (message.channel.name !== CONSTANTS.DEX_CHANNEL) {
