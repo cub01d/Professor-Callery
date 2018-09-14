@@ -1,3 +1,5 @@
+'use strict';
+
 const client = require('../src/client');
 const logger = require('../logger');
 const config = (process.env.USE_SECRETS_FILE) ?
@@ -20,49 +22,50 @@ const config = (process.env.USE_SECRETS_FILE) ?
         }
       }
     };
+
 const token = config.discord.token;
 
-function Off (req, res) {
+function Off(req, res) {
     logger.info({ event: 'Turning bot off' });
     try {
         client.destroy()
             .then(() => res.status(200).send({ success: 'Bot is offline' }))
-            .catch(e => res.status(422).send({ error: e }))
+            .catch(e => res.status(422).send({ error: e }));
     } catch (err) {
         logger.error({
-					event: `Error turning bot off: ${err.message} `
-				});
+			event: `Error turning bot off: ${err.message} `
+		});
     }
 }
 
-function On (req, res) {
+function On(req, res) {
     logger.info({ event: "Turning bot on" });
     try {
         client.login(token)
             .then(() => res.status(200).send({ success: 'Bot is online' }))
-            .catch(e => res.status(422).send({ error: e }))
+            .catch(e => res.status(422).send({ error: e }));
     } catch (err) {
         logger.error({
-					event: `Error turning bot on: ${err.message} `
-				});
+            event: `Error turning bot on: ${err.message} `
+        });
     }
 };
 
-async function Restart (req, res) {
+async function Restart(req, res) {
     logger.info({ event: "Restarting bot" });
     try {
-        await client.destroy()
-        await client.login(token)
+        await client.destroy();
+        await client.login(token);
     } catch (err) {
         logger.error({ event: `Error restarting bot: ${err.message}`});
-        return res.status(422).send(e)
+        return res.status(422).send(err);
     }
 
-    return res.status(200).send({ success: 'Bot restarted' })
+    return res.status(200).send({ success: 'Bot restarted' });
 }
 
 module.exports = {
     Off,
     On,
     Restart
-}
+};

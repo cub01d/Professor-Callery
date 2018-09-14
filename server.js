@@ -32,21 +32,17 @@ const config = (process.env.USE_SECRETS_FILE) ?
 
 const token = config.discord.token;
 const PORT = process.env.PORT || 3000;
-
-// prevent glitch app from going idle
-var uptime = 0;
-var millis = 300000;
-setInterval(function() {
-    http.get(config.server.webroot + uptime);
-    uptime += 5;
-    logger.info('Uptime: ' + uptime + ' minutes');
-}, millis);
-
 app.use(cors());
 app.use(bodyParser.json());
 
-
 app.use('/switch', SwitchRouter);
+app.get('/', function(req, res) {
+    var date = new Date(null);
+    date.setSeconds(process.uptime()); // specify value for SECONDS here
+    var result = date.toISOString().substr(11, 8);
+    res.send(result);
+});
+
 if (token)
     client.login(token);
 else
