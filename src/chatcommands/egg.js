@@ -8,6 +8,7 @@ const usage = 'Command usage: **!egg tier# minutesLeft [exgym] location details*
 
 const egg = (data, message) => {
     let reply = '';
+    let memberIsNull = (message.member) ? 0 : 1;
 
     const msgSplit = message.content.toLowerCase().split(' ');
     if (!msgSplit || msgSplit.length < 4) {
@@ -78,10 +79,9 @@ const egg = (data, message) => {
         detail = detail.substring(0,255);
     }
 
-    // TODO testing
-
+    let memberName = (memberIsNull) ? message.author.username + " (groupme)" : message.member.displayName;
     reply = eggTag + ' raid egg reported to ' + data.channelsByName['gymraids_alerts'] + ' (hatching: ' + twelveHrDate + ') at ' +
-        detail + specialRaidTag + ' added by ' + message.member.displayName;
+        detail + specialRaidTag + ' added by ' + memberName;
     message.channel.send(reply);
 
     // forward alert to other channels if not in testing

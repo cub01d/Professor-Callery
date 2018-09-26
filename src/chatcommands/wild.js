@@ -14,6 +14,7 @@ const removeTags = (html) => {
 
 const wild = (data, message) => {
     let reply = '';
+    let memberIsNull = (message.member) ? 0 : 1;
 
     let inNeighborhood = false;
     let usage = 'Command usage: **!wild pokemonName [tags] location details**';
@@ -68,7 +69,8 @@ const wild = (data, message) => {
         });
     }
 
-    reply = 'Wild **' + pokemonTag.toUpperCase() + '** ' + data.getEmoji(pokemonName) + ' at ' + detail + ' added by ' + message.member.displayName;
+    let memberName = (memberIsNull) ? message.author.username + " (groupme)" : message.member.displayName;
+    reply = 'Wild **' + pokemonTag.toUpperCase() + '** ' + data.getEmoji(pokemonName) + ' at ' + detail + ' added by ' + memberName;
     message.channel.send(reply);
 
     // forward alert only if not testing

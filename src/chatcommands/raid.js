@@ -8,6 +8,7 @@ const usage = 'Command usage: **!raid boss minutesRemaining [exgym] location det
 
 const raid = (data, message) => {
     let reply = '';
+    let memberIsNull = (message.member) ? 0 : 1;
 
     const msgSplit = message.content.toLowerCase().split(' ');
     if (!msgSplit || msgSplit.length < 4) {
@@ -116,8 +117,9 @@ const raid = (data, message) => {
         }
     });
     */
+    let memberName = (memberIsNull) ? message.author.username + " (groupme)" : message.member.displayName;
     reply = bossTag + legendaryTag + ' raid reported to ' + data.channelsByName['gymraids_alerts'] + ' (ending: ' + twelveHrDate + ') at ' +
-        detail + specialRaidTag + ' added by ' + message.member.displayName;
+        detail + specialRaidTag + ' added by ' + memberName;
     message.channel.send(reply);
 
 

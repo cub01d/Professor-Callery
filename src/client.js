@@ -25,6 +25,13 @@ const getEmoji = (pokemon) => {
     return '';
 };
 
+const logUserMessage = (message) => {
+    if (message.member)
+        logger.info({ event: `${message.member.displayName} said ${message.content} in ${message.channel.name}` });
+    else
+        logger.info({ event: `${message.author.username} said ${message.content} in ${message.channel.name}` });
+};
+
 client.on('ready', (done) => {
     logger.info({ event: 'Ready!' });
     client.channels.forEach((channel) => {
@@ -96,7 +103,8 @@ client.on('message', (message, cb) => {
         }
 
         // handle command
-        logger.info({ event: `${message.member.displayName} said ${message.content} in ${message.channel.name}` });
+        logUserMessage(message);
+
         switch (command) {
             case '!raid':
                 return cb(CHATCOMMANDS.raid(message));
@@ -124,7 +132,8 @@ client.on('message', (message, cb) => {
     }
 
     // handle commmand
-    logger.info({ event: `${message.member.displayName} said ${message.content} in ${message.channel.name}` });
+    logUserMessage(message);
+
     switch(command) {
         case '!breakpoint':
         case '!bp':
@@ -145,7 +154,6 @@ client.on('message', (message, cb) => {
         message.channel.send('Member is invisible - Commands cannot be run for users who are invisible, please remove your invisible status');
         return;
     }
-
 
     const errorMessage = 'Command not found: ' + command;
     logger.info({ event: `${command} was not understood `});
