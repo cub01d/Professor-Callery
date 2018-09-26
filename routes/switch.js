@@ -1,16 +1,11 @@
-const express = require('express')
-const Switch = require('../controllers/switches')
+'use strict';
+const express = require('express');
+const Switch = require('../controllers/switches');
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/off', Switch.Off)
-router.get('/on', Switch.On)
-router.get('/restart', Switch.Restart)
-router.get('/', function(req, res) {
-    var date = new Date(null);
-    date.setSeconds(process.uptime()); // specify value for SECONDS here
-    var result = date.toISOString().substr(11, 8);
-    res.send(result);
-});
+router.get('/off', Switch.Off);
+router.get('/on', Switch.On);
+router.get('/restart', Switch.Restart);
 
-module.exports = router
+module.exports = router;
