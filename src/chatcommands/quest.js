@@ -34,25 +34,22 @@ const quest = (data, message) => {
         return reply;
     }
 
+    // add whitespace at the end to make sure reward string not in description
+    // ex: !quest chansey industrial building => dust => stardust
     let reward = msgSplit[1].toLowerCase();
     let tms = ['chargetm','fasttm', 'tm', 'charge', 'fast'];
     if (message.content.indexOf('rare cand') > -1 || message.content.indexOf('rarecand') > -1 || reward === 'rc' || reward === '1rc' || reward === '3rc') {
         reward = 'rarecandy';
-        //if(detail.toLowerCase().indexOf(' rc') > -1)
-        //  detail = detail.substring(detail.toLowerCase().indexOf(' rc') + 3);
-        //else if (detail.toLowerCase().indexOf('candy') > -1)
-        //  detail = detail.substring(detail.toLowerCase().indexOf('candy') + 6);
     }
     else if (tms.indexOf(reward) > -1) {
         reward = 'tm';
-        //if (detail.toLowerCase().indexOf('tm ') > -1)
-        //  detail = detail.substring(detail.toLowerCase().indexOf('tm ') + 3)
     }
-    else if (message.content.indexOf('stardust') > -1 || message.content.indexOf('dust') > -1) {
+    else if (message.content.indexOf('stardust') > -1 || message.content.indexOf('dust ') > -1) {
         reward = 'stardust';
-        //detail = detail.substring(detail.toLowerCase().indexOf('dust') + 5);
     }
-
+    else if (message.content.indexOf('silverpinap') > -1 || message.content.indexOf('silver p') > -1) {
+        reward = 'silverpinap';
+    }
     var rewardTag = reward; //generate a tag for the pokemon to alert users
 
     data.GUILD.roles.forEach((role) => {
